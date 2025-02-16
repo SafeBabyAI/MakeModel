@@ -1,0 +1,12 @@
+train: C:\Users\USER\Desktop\my_git\data-science-experiments\safebaby_ai_model\yolov8\Baby_Monitoring.v4i.yolov8\train\images
+val: C:\Users\USER\Desktop\my_git\data-science-experiments\safebaby_ai_model\yolov8\Baby_Monitoring.v4i.yolov8\train\images
+
+nc: 6
+names: ['baby', 'close eye', 'crib', 'mouth', 'nose', 'opened eyes']
+
+roboflow:
+  workspace: tt-vwpdg
+  project: baby_monitoring
+  version: 4
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/tt-vwpdg/baby_monitoring/dataset/4

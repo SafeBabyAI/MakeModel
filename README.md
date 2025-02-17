@@ -1,5 +1,5 @@
 # MakeModel
-훈련시킨 모델과 사용한 데이터셋
+모델링 및 데이터 전처리 레포지토리
 ### ResNet50 분류 모델 결합 예상 흐름도
 ```plaintext
  이미지 입력(촬영) → ResNet50 분류 -> [front / side / back] 

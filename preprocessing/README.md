@@ -1,4 +1,4 @@
-# OpenCV 전처리 코드
+## OpenCV 전처리 코드
 
 아기 이미지 데이터 전처리 코드입니다.
 
@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 import os
 
 # 이미지 폴더 경로 설정
-folder_path = 'C:/Users/USER/Desktop/babyai/frontraw_03'  # 이미지가 있는 폴더 경로
+folder_path = 'C:/Users/USER/Desktop/babyai/frontraw_03'  
 
 # Super Resolution (2배 확대용 ESPCN 모델)
 sr = cv2.dnn_superres.DnnSuperResImpl_create()

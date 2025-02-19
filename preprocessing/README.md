@@ -8,7 +8,7 @@
 - 리사이징
 - 보간법 사용 이미지 확대 및 화질개선
   
-#opencv 라이브러리 이용
+# opencv 라이브러리 이용
 
 import cv2
 import numpy as np

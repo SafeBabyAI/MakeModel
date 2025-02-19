@@ -1,40 +1,33 @@
 ## OpenCV 전처리 코드
+# 아기 이미지 데이터 전처리 코드입니다.
 
-아기 이미지 데이터 전처리 코드입니다.
-
-## 전처리 내용
-
-- 이미지 선별
-- 리사이징
-- 보간법 사용 이미지 확대 및 화질개선
-  
-# opencv 라이브러리 이용
-
+# 필요 라이브러리 임포트
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 import os
 
 # 이미지 폴더 경로 설정
+folder_path = 'C:/Users/USER/Desktop/babyai/frontraw_03'  # 원본 이미지 폴더 경로
 
-folder_path = 'C:/Users/USER/Desktop/babyai/frontraw_03'  
-
-# Super Resolution (2배 확대용 ESPCN 모델)
+# Super Resolution (2배 확대용 ESPCN 모델) 설정
+# ESPCN_x2.pb 모델 파일 로드
 sr = cv2.dnn_superres.DnnSuperResImpl_create()
-model_path = 'C:/Users/USER/Downloads/ESPCN_x2.pb'  # ESPCN_x2.pb 모델 파일 경로
+model_path = 'C:/Users/USER/Downloads/ESPCN_x2.pb'  # ESPCN 모델 경로
 sr.readModel(model_path)
 sr.setModel("espcn", 2)  # 2배 확대
 
-    # 폴더에서 모든 이미지 파일 읽기
+# 폴더에서 모든 이미지 파일 읽기
 image_files = [f for f in os.listdir(folder_path) if f.endswith(('.jpg', '.jpeg', '.png'))]
 
-    # 결과 저장 폴더 설정
+# 결과 저장 폴더 설정
 save_dir = 'C:/Users/USER/Desktop/babyai/processed_front_03'
 os.makedirs(save_dir, exist_ok=True)
 
-    # 이미지 처리 및 저장
-file_counter = 1  # 파일 번호 초기화
+# 파일 번호 초기화
+file_counter = 1
 
+# 각 이미지 파일에 대해 전처리 작업 수행
 for image_file in image_files:
     image_path = os.path.join(folder_path, image_file)
     
@@ -44,7 +37,7 @@ for image_file in image_files:
     # 이미지 리사이즈 (224x224로 크기 변경)
     img_resized = cv2.resize(img, (224, 224))
     
-    # 이미지 밝게/어둡게 처리
+    # 이미지 밝기 조정 (밝게/어둡게 처리)
     img2 = cv2.convertScaleAbs(img_resized, alpha=1, beta=30)  # 밝기 30만큼 밝게 처리
     img3 = cv2.convertScaleAbs(img_resized, alpha=1, beta=-30)  # 밝기 30만큼 어둡게 처리
 
@@ -70,7 +63,7 @@ for image_file in image_files:
     sr_img2_resized = cv2.resize(sr_img2, (224, 224))  # 밝게 처리된 이미지 리사이즈
     sr_img3_resized = cv2.resize(sr_img3, (224, 224))  # 어둡게 처리된 이미지 리사이즈
 
-    # 결과 화면에 표시
+    # 결과 화면에 표시 (4개의 이미지를 한 화면에 나열)
     plt.figure(figsize=(12, 6))
 
     plt.subplot(1, 4, 1)
@@ -95,19 +88,18 @@ for image_file in image_files:
 
     plt.show()
 
-    # 파일 이름 형식
-    file_name_base = f"f{file_counter:04d}"  # b0001, b0002와 같은 형식으로 저장
+    # 파일 이름 형식 설정 (f0001, f0002 와 같은 형식으로 저장)
+    file_name_base = f"f{file_counter:04d}"  
 
     # 저장: Super Resolution 이미지 저장 (원본, 밝기 조정, 어두운 처리된 이미지 각각)
     sr_save_path = os.path.join(save_dir, f"{file_name_base}_sr.jpeg")
     cv2.imwrite(sr_save_path, sr_img_resized)
 
     # 좌우 반전 이미지 저장
-    
-    # 180도 회전된 이미지 저장
     sr_fli_save_path = os.path.join(save_dir, f"{file_name_base}_sr_fli.jpeg")
     cv2.imwrite(sr_fli_save_path, img4_resized)  # 좌우 반전 이미지 저장
 
+    # 180도 회전된 이미지 저장
     sr_ro_save_path = os.path.join(save_dir, f"{file_name_base}_sr_ro.jpeg")
     cv2.imwrite(sr_ro_save_path, img5_resized)  # 180도 회전 이미지 저장
 
@@ -118,7 +110,6 @@ for image_file in image_files:
     # 어둡게 처리된 이미지 저장
     sr_dark_save_path = os.path.join(save_dir, f"{file_name_base}_dark_sr.jpeg")
     cv2.imwrite(sr_dark_save_path, sr_img3_resized)
-
 
     # 파일 번호 증가
     file_counter += 1

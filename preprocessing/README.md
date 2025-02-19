@@ -8,16 +8,18 @@
 - 리사이징
 - 보간법 사용 이미지 확대 및 화질개선
   
-   #opencv 라이브러리 이용
+#opencv 라이브러리 이용
+
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 import os
 
-      # 이미지 폴더 경로 설정
+# 이미지 폴더 경로 설정
+
 folder_path = 'C:/Users/USER/Desktop/babyai/frontraw_03'  
 
-    # Super Resolution (2배 확대용 ESPCN 모델)
+# Super Resolution (2배 확대용 ESPCN 모델)
 sr = cv2.dnn_superres.DnnSuperResImpl_create()
 model_path = 'C:/Users/USER/Downloads/ESPCN_x2.pb'  # ESPCN_x2.pb 모델 파일 경로
 sr.readModel(model_path)

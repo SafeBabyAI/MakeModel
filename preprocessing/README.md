@@ -7,29 +7,30 @@
 - 이미지 선별
 - 리사이징
 - 보간법 사용 이미지 확대 및 화질개선
-
+  
+   #opencv 라이브러리 이용
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 import os
 
-# 이미지 폴더 경로 설정
+      # 이미지 폴더 경로 설정
 folder_path = 'C:/Users/USER/Desktop/babyai/frontraw_03'  
 
-# Super Resolution (2배 확대용 ESPCN 모델)
+    # Super Resolution (2배 확대용 ESPCN 모델)
 sr = cv2.dnn_superres.DnnSuperResImpl_create()
 model_path = 'C:/Users/USER/Downloads/ESPCN_x2.pb'  # ESPCN_x2.pb 모델 파일 경로
 sr.readModel(model_path)
 sr.setModel("espcn", 2)  # 2배 확대
 
-# 폴더에서 모든 이미지 파일 읽기
+    # 폴더에서 모든 이미지 파일 읽기
 image_files = [f for f in os.listdir(folder_path) if f.endswith(('.jpg', '.jpeg', '.png'))]
 
-# 결과 저장 폴더 설정
+    # 결과 저장 폴더 설정
 save_dir = 'C:/Users/USER/Desktop/babyai/processed_front_03'
 os.makedirs(save_dir, exist_ok=True)
 
-# 이미지 처리 및 저장
+    # 이미지 처리 및 저장
 file_counter = 1  # 파일 번호 초기화
 
 for image_file in image_files:

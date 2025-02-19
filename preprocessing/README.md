@@ -1,33 +1,33 @@
 ## OpenCV 전처리 코드
-# 아기 이미지 데이터 전처리 코드입니다.
+## 아기 이미지 데이터 전처리 코드입니다.
 
-# 필요 라이브러리 임포트
+## 필요 라이브러리 임포트
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 import os
 
-# 이미지 폴더 경로 설정
+## 이미지 폴더 경로 설정
 folder_path = 'C:/Users/USER/Desktop/babyai/frontraw_03'  # 원본 이미지 폴더 경로
 
-# Super Resolution (2배 확대용 ESPCN 모델) 설정
-# ESPCN_x2.pb 모델 파일 로드
+## Super Resolution (2배 확대용 ESPCN 모델) 설정
+## ESPCN_x2.pb 모델 파일 로드
 sr = cv2.dnn_superres.DnnSuperResImpl_create()
 model_path = 'C:/Users/USER/Downloads/ESPCN_x2.pb'  # ESPCN 모델 경로
 sr.readModel(model_path)
 sr.setModel("espcn", 2)  # 2배 확대
 
-# 폴더에서 모든 이미지 파일 읽기
+## 폴더에서 모든 이미지 파일 읽기
 image_files = [f for f in os.listdir(folder_path) if f.endswith(('.jpg', '.jpeg', '.png'))]
 
-# 결과 저장 폴더 설정
+## 결과 저장 폴더 설정
 save_dir = 'C:/Users/USER/Desktop/babyai/processed_front_03'
 os.makedirs(save_dir, exist_ok=True)
 
-# 파일 번호 초기화
+## 파일 번호 초기화
 file_counter = 1
 
-# 각 이미지 파일에 대해 전처리 작업 수행
+## 각 이미지 파일에 대해 전처리 작업 수행
 for image_file in image_files:
     image_path = os.path.join(folder_path, image_file)
     

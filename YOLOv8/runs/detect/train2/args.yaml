@@ -1,7 +1,7 @@
 task: detect
 mode: train
-model: yolov8n.pt
-data: data\Baby_Monitoring.v4i.yolov8\data.yaml
+model: yolov8m.pt
+data: Baby_Monitoring.v4i.yolov8\data.yaml
 epochs: 10
 time: null
 patience: 100

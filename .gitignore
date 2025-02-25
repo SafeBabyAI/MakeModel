@@ -2,6 +2,8 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,jupyternotebooks,images
 
 ### Images ###
+YOLOv8/Baby_Monitoring.v4i.yolov8
+
 # JPEG
 *.jpg
 *.jpeg
